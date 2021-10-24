@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/addHospitalProfile"
+        android:icon="@drawable/ic_hospitalprofile"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_textColor="#ffffff"
+        android:title="Add Hospital"/>
+
+    <item
+        android:id="@+id/addDoctor"
+        android:icon="@drawable/ic_doctoricon"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_textColor="#ffffff"
+        android:title="Add Doctor"/>
+
+    <item
+        android:id="@+id/addBooking"
+        android:icon="@drawable/ic_booking"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_textColor="#ffffff"
+        android:title="Add Booking"/>
+
+    <item
+        android:id="@+id/adminEditDoctorTime"
+        android:icon="@drawable/ic_doctortime"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_textColor="#ffffff"
+        android:title="Doctor time"/>
+
+    <item
+        android:id="@+id/adminProfile"
+        android:icon="@drawable/ic_profile"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_textColor="#ffffff"
+        android:title="Profile"/>
+
+
+
+</menu>

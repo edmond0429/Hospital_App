@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    tools:context=".addDoctorProfileFragment"
+    tools:ignore="ExtraText">
+
+        <TextView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="80dp"
+            android:fontFamily="sans-serif-black"
+            android:lineSpacingExtra="8sp"
+            android:shadowColor="#8a8584"
+            android:shadowDx="-8"
+            android:shadowDy="-10"
+            android:shadowRadius="10"
+            android:text="Ed's Medic"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/bannerDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/banner"
+            android:layout_marginBottom="28dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="12dp"
+            android:text="The best Medic app"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="#ccffff"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/banner" />
+
+        <EditText
+            android:id="@+id/etHospitalName"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="___eg : Lam Hua Ee____"
+            android:inputType="text"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
+        <TextView
+            android:id="@+id/tvHospitalName"
+            android:layout_width="131dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Hospital Name: "
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/etCategory"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="133dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="4dp"
+            android:text="Doctor's Category: "
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/etCategory"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvHospitalName" />
+
+        <TextView
+            android:id="@+id/tvDoctorUrl"
+            android:layout_width="136dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="16dp"
+            android:text="Url Of Doctor Image:"
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/etDoctorUrl"
+            app:layout_constraintHorizontal_bias="0.894"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDoctorDescription" />
+
+        <EditText
+            android:id="@+id/etDoctorUrl"
+            android:layout_width="220dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:hint="https://filmdaily.co/wp-content/uploads/2020/08/annabelle-lede-1300x866.jpeg"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDoctorDescription" />
+
+        <TextView
+            android:id="@+id/tvDoctorDescription"
+            android:layout_width="135dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:text="Doctor Description:"
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/etDoctorDescription"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDoctorName" />
+
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="188dp"
+            android:layout_height="58dp"
+            android:background="@drawable/shape_login_button"
+            android:text="Add New Doctor "
+            android:textColor="#000099"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/etDoctorDescription"
+            android:layout_width="236dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:hint="____He graduated from ...,__"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.874"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDoctorName" />
+
+        <EditText
+            android:id="@+id/etDoctorName"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:hint="___eg : Dr.Edward Tan___"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCategory" />
+
+        <TextView
+            android:id="@+id/tvDoctorName"
+            android:layout_width="132dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="4dp"
+            android:text="Doctor's Name:"
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/etDoctorName"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginTop="4dp"
+            android:ems="10"
+            android:hint="___eg : Brain____"
+            android:inputType="text"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etHospitalName" />
+
+
+        <EditText
+            android:id="@+id/etDoctorTime"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="9.00-14.00"
+            android:textColor="#ccffff"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/tvDoctorTime"
+            app:layout_constraintTop_toBottomOf="@+id/etDoctorUrl" />
+
+
+        <TextView
+            android:id="@+id/tvDoctorTime"
+            android:layout_width="133dp"
+            android:layout_height="54dp"
+            android:layout_marginStart="24dp"
+            android:text="Doctor's Category: "
+            android:textColor="#ccffff"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDoctorUrl" />
+
+        <com.ismaeldivita.chipnavigation.ChipNavigationBar
+            android:id="@+id/adminChipNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cnb_menuResource="@menu/admin_nav"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+<!--        <FrameLayout-->
+<!--            android:id="@+id/container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_above="@+id/adminChipNavigation"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"-->
+<!--            tools:layout_editor_absoluteX="0dp" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

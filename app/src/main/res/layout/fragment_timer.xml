@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".TimerFragment">
+
+    <TextView
+        android:id="@+id/medicalReminder"
+        android:layout_width="356dp"
+        android:layout_height="82dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:lineSpacingExtra="8sp"
+        android:shadowColor="#ffffff"
+        android:shadowDx="-8"
+        android:shadowDy="-10"
+        android:shadowRadius="5"
+        android:text="Medical Alarm"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="50sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="531dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/chipNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalReminder"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.tuann.floatingactionbuttonexpandable.FloatingActionButtonExpandable
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        app:fab_bg_color="#1F40E6"
+        app:fab_content="Add a new alarm"
+        app:fab_duration="200"
+        app:fab_icon="@drawable/ic_alarm"
+        app:layout_constraintBottom_toBottomOf="@+id/rvAlarm"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/chipNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cnb_menuResource="@menu/nav_item"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chipNavigation"
+        app:layout_constraintBottom_toTopOf="@+id/chipNavigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

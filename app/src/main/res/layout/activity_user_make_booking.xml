@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".userMakeBooking">
+
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:fontFamily="sans-serif-black"
+        android:lineSpacingExtra="8sp"
+        android:shadowColor="#8a8584"
+        android:shadowDx="-8"
+        android:shadowDy="-10"
+        android:shadowRadius="10"
+        android:text="Ed's Medic"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/bannerDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/banner"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="12dp"
+        android:text="The best Medic app"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="#ccffff"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/banner" />
+
+    <EditText
+        android:id="@+id/etPatientName"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="___eg : Edward____"
+        android:inputType="text"
+        android:textColor="#ccffff"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
+    <TextView
+        android:id="@+id/tvPatient"
+        android:layout_width="131dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:text="Patient Name: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/etCategory"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="131dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="Booking date: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPatient" />
+
+    <EditText
+        android:id="@+id/etBookingDate"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="___eg : 10-10-2021___"
+        android:inputType="text"
+        android:textColor="#ccffff"
+        android:textColorHint="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/tvDate"
+        app:layout_constraintTop_toBottomOf="@+id/etPatientName" />
+
+
+    <Button
+        android:id="@+id/btnMakeBooking"
+        android:layout_width="188dp"
+        android:layout_height="58dp"
+        android:background="@drawable/shape_login_button"
+        android:text="Make booking request"
+        android:textColor="#000099"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
+
+    <TextView
+        android:id="@+id/tvBookingTime"
+        android:layout_width="128dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:text="Booking time: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+    <Spinner
+        android:id="@+id/spinnerbookingTime"
+        android:layout_width="51dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvBookingTimeSelected"
+        app:layout_constraintTop_toBottomOf="@+id/etBookingDate" />
+
+    <TextView
+        android:id="@+id/tvMeetMethod"
+        android:layout_width="137dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Meet Method: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookingTime" /><![CDATA[
+
+
+
+    " />
+
+
+
+
+
+
+
+
+    ]]>
+
+    <Spinner
+        android:id="@+id/spinnerMeetMethod"
+        android:layout_width="52dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvMeetMethodSelected"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookingTimeSelected" />
+
+    <TextView
+        android:id="@+id/tvBookingTimeSelected"
+        android:layout_width="190dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:text="Choose booking time."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvBookingTime"
+        app:layout_constraintTop_toBottomOf="@+id/etBookingDate" />
+
+    <TextView
+        android:id="@+id/tvMeetMethodSelected"
+        android:layout_width="188dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Choose Method to Meet."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvMeetMethod"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookingTimeSelected" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
