@@ -33,7 +33,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmViewHol
         AlarmViewHolder alarmViewHolder = (AlarmViewHolder)holder;
 
         MedicAlarm medicAlarm = alarmlist.get(position);
-        alarmViewHolder.tvMedicTitle.setText(alarmlist.get(position).getMedicTitle());
+        alarmViewHolder.tvMedicTitle.setText(medicAlarm.getMedicTitle());
         alarmViewHolder.tvMedicTime.setText(medicAlarm.getMedicTime());
         alarmViewHolder.tvRepetition.setText(medicAlarm.getMedicRepetition());
 

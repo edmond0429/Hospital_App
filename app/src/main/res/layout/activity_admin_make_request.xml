@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".userMakeBooking">
-
+    tools:context=".adminMakeRequest">
 
 
     <TextView
@@ -53,8 +52,8 @@
         android:id="@+id/etPatientName"
         android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="___eg : Edward____"
         android:inputType="text"
@@ -216,6 +215,14 @@
         app:layout_constraintStart_toEndOf="@+id/tvDoc"
         app:layout_constraintTop_toBottomOf="@+id/tvMeetMethodSelected" />
 
-
+    <Spinner
+        android:id="@+id/spinnerDoctor"
+        android:layout_width="55dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvMeetMethodSelected"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMeetMethod" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

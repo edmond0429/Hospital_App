@@ -1,5 +1,6 @@
 package com.example.hospital_app;
 
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,15 +29,13 @@ import java.util.Calendar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class userMakeBooking extends AppCompatActivity {
+public class adminMakeRequest extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener setListener;
     TextView mTvBookingTime, mTvMeetMethod, mTvDoctor;
     EditText PatientName,BookingDate;
     Button BookingButton;
-    private FirebaseUser user;
-    private DatabaseReference mDatabaseReference, reference;
-    private String userID;
+    private DatabaseReference mDatabaseReference, reference, mDatabaseReference1;
     Booking booking;
     FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private Spinner mSpinnerBookingTime, mSpinnerMethodMeet, mSpinnerDoctor;
@@ -46,14 +44,15 @@ public class userMakeBooking extends AppCompatActivity {
     FetchData fetchData;
     String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected;
     String[] bookingtime = { "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "11.00-11.30", "11.30-12.00",
-                            "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
-                            "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
+            "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
+            "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
     String[] spinnerMeetmethod = {"Choose Meet Method", "Online Consultation", "Face to face"};
+    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_make_booking);
+        setContentView(R.layout.activity_admin_make_request);
 
         PatientName = (EditText)findViewById(R.id.etPatientName);
         BookingDate = (EditText)findViewById(R.id.etBookingDate);
@@ -83,7 +82,7 @@ public class userMakeBooking extends AppCompatActivity {
         BookingDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(userMakeBooking.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(adminMakeRequest.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month + 1;
@@ -98,12 +97,9 @@ public class userMakeBooking extends AppCompatActivity {
             }
         });
 
-        spinnerBookingTimeFunction();
+
         spinnerMeetMethodFunction();
-//        spinnerDoctorFunction();
-        String doctorName = fetchData.getDoctorName();
-        mTvDoctor.setText(doctorName);
-        doctorSelected = mTvDoctor.getText().toString();
+        spinnerDoctorFunction();
 
         BookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +114,7 @@ public class userMakeBooking extends AppCompatActivity {
 
                 booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected);
                 reference.child(patientName).setValue(booking);
-                Toast.makeText(userMakeBooking.this, "Successful request a booking", Toast.LENGTH_SHORT).show();
+                Toast.makeText(adminMakeRequest.this, "Successful request a booking", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -148,6 +144,7 @@ public class userMakeBooking extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 doctorSelected = mSpinnerDoctor.getSelectedItem().toString();
                 mTvDoctor.setText(doctorSelected);
+                filterBookingTime(doctorSelected);
             }
 
             @Override
@@ -155,6 +152,7 @@ public class userMakeBooking extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void spinnerMeetMethodFunction() {
@@ -181,76 +179,64 @@ public class userMakeBooking extends AppCompatActivity {
         });
     }
 
-    private void spinnerBookingTimeFunction() {
-        spinnerBookingTime = new ArrayList<>();
-        String[] temp = filterBookingTime();
-        adapterBookingTime = new ArrayAdapter<String>(getApplication(),android.R.layout.simple_spinner_dropdown_item,temp);
-        adapterBookingTime.setDropDownViewResource(R.layout.my_dropdown_item);
+    private void filterBookingTime(String doctorSelected) {
+        ArrayList<String> temp = new ArrayList<>();
 
-        mSpinnerBookingTime.setAdapter(adapterBookingTime);
-        mSpinnerBookingTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference("Doctor").child(doctorSelected);
+        mDatabaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(adapterView.getItemAtPosition(i).equals("Choose Booking Time")){
-//                    Toast.makeText(userMakeBooking.this, "Please select a booking time", Toast.LENGTH_SHORT).show();
-                }else{
-                    bookingTimeSelected = mSpinnerBookingTime.getSelectedItem().toString();
-                    mTvBookingTime.setText(bookingTimeSelected);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                   time = snapshot.child("time").getValue().toString();
+
+                String currentString = time;
+                String[] separatedStartAndEnd = currentString.split("-");
+                String[] startTime = separatedStartAndEnd[0].split("\\.");
+                Time starttime = new Time(Integer.parseInt(startTime[0]),Integer.parseInt(startTime[1]),0);
+
+                String[] endTime = separatedStartAndEnd[1].split("\\.");
+                Time endtime = new Time(Integer.parseInt(endTime[0]),Integer.parseInt(endTime[1]),0);
+
+                for (String currentString2:bookingtime) {
+                    String[] separatedStartAndEnd2 = currentString2.split("-");
+                    String[] startTime2 = separatedStartAndEnd2[0].split("\\.");
+                    Time starttime2 = new Time(Integer.parseInt(startTime2[0]),Integer.parseInt(startTime2[1]),0);
+
+                    String[] endTime2 = separatedStartAndEnd2[1].split("\\.");
+                    Time endtime2 = new Time(Integer.parseInt(endTime2[0]),Integer.parseInt(endTime2[1]),0);
+
+                    if ((starttime.before(starttime2) || starttime.equals(starttime2)) && (endtime.after(endtime2) || endtime.equals(endtime2))) {
+                        temp.add(currentString2);
+                    }
                 }
+                Object[] tempArray = temp.toArray();
+                String[] filteredTime = new String[tempArray.length];
+                System.arraycopy(tempArray, 0, filteredTime, 0, tempArray.length);
+
+                spinnerBookingTime = new ArrayList<>();
+                adapterBookingTime = new ArrayAdapter<String>(getApplication(),android.R.layout.simple_spinner_dropdown_item,temp);
+                adapterBookingTime.setDropDownViewResource(R.layout.my_dropdown_item);
+
+                mSpinnerBookingTime.setAdapter(adapterBookingTime);
+                mSpinnerBookingTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if(adapterView.getItemAtPosition(i).equals("Choose Booking Time")){
+//                    Toast.makeText(userMakeBooking.this, "Please select a booking time", Toast.LENGTH_SHORT).show();
+                        }else{
+                            bookingTimeSelected = mSpinnerBookingTime.getSelectedItem().toString();
+                            mTvBookingTime.setText(bookingTimeSelected);
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
-    private String[] filterBookingTime() {
-        ArrayList<String> temp = new ArrayList<>();
-//        reference.child(doctor)
-        String currentString = fetchData.getTime();
-        String[] separatedStartAndEnd = currentString.split("-");
-        String[] startTime = separatedStartAndEnd[0].split("\\.");
-        Time starttime = new Time(Integer.parseInt(startTime[0]),Integer.parseInt(startTime[1]),0);
-
-        String[] endTime = separatedStartAndEnd[1].split("\\.");
-        Time endtime = new Time(Integer.parseInt(endTime[0]),Integer.parseInt(endTime[1]),0);
-
-        for (String currentString2:bookingtime) {
-            String[] separatedStartAndEnd2 = currentString2.split("-");
-            String[] startTime2 = separatedStartAndEnd2[0].split("\\.");
-            Time starttime2 = new Time(Integer.parseInt(startTime2[0]),Integer.parseInt(startTime2[1]),0);
-
-            String[] endTime2 = separatedStartAndEnd2[1].split("\\.");
-            Time endtime2 = new Time(Integer.parseInt(endTime2[0]),Integer.parseInt(endTime2[1]),0);
-
-            if ((starttime.before(starttime2) || starttime.equals(starttime2)) && (endtime.after(endtime2) || endtime.equals(endtime2))) {
-                temp.add(currentString2);
-            }
-        }
-        Object[] tempArray = temp.toArray();
-        String[] filteredTime = new String[tempArray.length];
-        System.arraycopy(tempArray, 0, filteredTime, 0, tempArray.length);
-        return filteredTime;
-    }
-
-
-//    private void showDateDialog(EditText BookingDate) {
-//        Calendar calendar = Calendar.getInstance();
-//        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                calendar.set(Calendar.YEAR,year);
-//                calendar.set(Calendar.MONTH,month);
-//                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                BookingDate.setText(simpleDateFormat.format(calendar.getTime()));
-//            }
-//        };
-//        new DatePickerDialog(getApplication(),dateSetListener,
-//                calendar.get(Calendar.YEAR),
-//                calendar.get(Calendar.MONTH),
-//                calendar.get(Calendar.DAY_OF_MONTH)).show();
-//    }
-
 }

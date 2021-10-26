@@ -47,8 +47,8 @@ public class NotificationHelper extends ContextWrapper {
     //build a notification for alarm
     public NotificationCompat.Builder getChannel1Notification(String alarmtitle, String message){
         //create intent when user press the notification
-        Intent resultIntent = new Intent(this,snoozePage.class);
-        PendingIntent resultPendingIntent  = PendingIntent.getActivity(this,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent resultIntent = new Intent(getApplicationContext(),snoozePage.class);
+        PendingIntent resultPendingIntent  = PendingIntent.getActivity(getApplicationContext(),1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),chn1ID)
                 .setContentTitle(alarmtitle)

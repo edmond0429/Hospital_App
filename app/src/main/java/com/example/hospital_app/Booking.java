@@ -5,15 +5,17 @@ public class Booking {
     public String bookingDate;
     public String bookingTime;
     public String bookingMethod;
+    public String doctorName;
 
     public Booking(){
     }
 
-    public Booking(String patientName, String bookingDate, String bookingTime, String bookingMethod) {
+    public Booking(String patientName, String bookingDate, String bookingTime, String bookingMethod, String doctorName) {
         this.patientName = patientName;
         this.bookingDate = bookingDate;
         this.bookingTime = bookingTime;
         this.bookingMethod = bookingMethod;
+        this.doctorName = doctorName;
     }
 
     public String getPatientName() {
@@ -46,5 +48,13 @@ public class Booking {
 
     public void setBookingMethod(String bookingMethod) {
         this.bookingMethod = bookingMethod;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 }

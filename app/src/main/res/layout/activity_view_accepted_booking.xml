@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".DoctorCategory">
-
+    tools:context=".ViewAcceptedBooking">
 
     <TextView
-        android:id="@+id/doctorCategory"
-        android:layout_width="match_parent"
-        android:layout_height="82dp"
+        android:id="@+id/tvAcceptedBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -21,24 +21,26 @@
         android:shadowDx="-8"
         android:shadowDy="-10"
         android:shadowRadius="5"
-        android:text="Doctor's Category"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="45sp"
-        android:textStyle="bold|italic"
+        android:text="Accepted Booking"
         android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="50sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewDoctorCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:id="@+id/rvAcceptBooking"
+        android:layout_width="match_parent"
+        android:layout_height="531dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctorCategory" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedBooking"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

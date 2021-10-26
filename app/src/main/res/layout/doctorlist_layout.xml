@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,28 +10,42 @@
 
     <ImageView
         android:id="@+id/imgDoctor"
-        android:layout_width="80dp"
-        android:layout_height="150dp"
+        android:layout_width="91dp"
+        android:layout_height="163dp"
         android:layout_margin="20dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/doctor1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#000000"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/doctorDescription"
+        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintStart_toEndOf="@+id/imgDoctor"
+        app:layout_constraintTop_toTopOf="@+id/imgDoctor" />
 
     <TextView
         android:id="@+id/doctorDescription"
         android:layout_width="250dp"
-        android:layout_height="130dp"
+        android:layout_height="118dp"
         android:fontFamily="sans-serif"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold|italic"
+        android:textColor="#C3673E"
+        android:textSize="25sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toEndOf="@+id/imgDoctor"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/doctorName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/favBtn"
@@ -41,9 +56,9 @@
         android:gravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807" />
+        app:layout_constraintVertical_bias="0.852" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

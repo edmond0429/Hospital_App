@@ -49,6 +49,7 @@ public class HelperAdapter2 extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final HelperAdapter2.ViewHolderClass viewHolderClass = (HelperAdapter2.ViewHolderClass) holder;
         final FetchData fetchDataList = fetchData.get(position);
+        viewHolderClass.mDoctor.setText(fetchDataList.getDoctorName());
         viewHolderClass.mDoctorDescription.setText(fetchDataList.getDoctorDescription());
         viewHolderClass.mDoctorDescription.setTextColor(Color.parseColor("#3b0101"));
         Picasso.get().load(fetchDataList.getDoctorUrl()).into(viewHolderClass.mImageView);
@@ -127,12 +128,13 @@ public class HelperAdapter2 extends RecyclerView.Adapter{
     }
     public class ViewHolderClass extends RecyclerView.ViewHolder
     {
-        TextView mDoctorDescription;
+        TextView mDoctorDescription, mDoctor;
         ImageView mImageView;
         ImageButton btnFav;
 
         public ViewHolderClass(@NonNull View itemView) {
             super(itemView);
+            mDoctor = itemView.findViewById(R.id.doctorName);
             mDoctorDescription = itemView.findViewById(R.id.doctorDescription);
             mImageView = itemView.findViewById(R.id.imgDoctor);
             btnFav = itemView.findViewById(R.id.favBtn);
