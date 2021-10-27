@@ -34,8 +34,13 @@ public class BlankTimeFragment extends Fragment {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(getActivity(), UserHomepage.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.booking:
                         if(FirebaseAuth.getInstance().getCurrentUser() == null) {

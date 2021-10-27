@@ -13,7 +13,7 @@
       android:layout_width="263dp"
       android:layout_height="181dp"
       android:gravity="center"
-      android:text="Please Login to continue Homepage !!!"
+      android:text="Perform Login to access more features !!!"
       android:textColor="#ffffff"
       android:textSize="30dp"
       app:layout_constraintBottom_toBottomOf="parent"

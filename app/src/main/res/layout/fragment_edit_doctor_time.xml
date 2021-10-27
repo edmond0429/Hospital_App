@@ -190,12 +190,12 @@
         app:layout_constraintTop_toTopOf="@+id/spinnerViewDoctor" />
 
 
-    <!--    <FrameLayout-->
-<!--        android:id="@+id/container"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_above="@+id/adminChipNavigation"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"-->
-<!--        tools:layout_editor_absoluteX="0dp" />-->
+        <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/adminChipNavigation"
+        app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

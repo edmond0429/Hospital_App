@@ -29,8 +29,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(int i) {
                 switch (i) {
                     case R.id.home:
-                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                        startActivity(intent);
+                        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Intent intent = new Intent(getBaseContext(), UserHomepage.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.booking:
                         if(FirebaseAuth.getInstance().getCurrentUser() == null) {

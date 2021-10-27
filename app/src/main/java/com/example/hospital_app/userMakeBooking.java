@@ -32,19 +32,19 @@ import androidx.appcompat.app.AppCompatActivity;
 public class userMakeBooking extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener setListener;
-    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor;
-    EditText PatientName,BookingDate;
+    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor, PatientName;
+    EditText BookingDate;
     Button BookingButton;
     private FirebaseUser user;
-    private DatabaseReference mDatabaseReference, reference;
     private String userID;
+    private DatabaseReference mDatabaseReference, reference, profileRef;
     Booking booking;
     FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private Spinner mSpinnerBookingTime, mSpinnerMethodMeet, mSpinnerDoctor;
     ArrayList<String> spinnerBookingTime, spinnerMeetMethod, spinnerDoctor;
     ArrayAdapter<String> adapterBookingTime, adapterMethod, adapterDoctor;
     FetchData fetchData;
-    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected;
+    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected, patientName;
     String[] bookingtime = { "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "11.00-11.30", "11.30-12.00",
                             "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
                             "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
@@ -55,7 +55,7 @@ public class userMakeBooking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_make_booking);
 
-        PatientName = (EditText)findViewById(R.id.etPatientName);
+        PatientName = (TextView)findViewById(R.id.tvPatientName);
         BookingDate = (EditText)findViewById(R.id.etBookingDate);
         BookingDate.setInputType(InputType.TYPE_NULL);      //Hiding keyboard when pressed the date
         mSpinnerBookingTime = (Spinner)findViewById(R.id.spinnerbookingTime);
@@ -71,6 +71,23 @@ public class userMakeBooking extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference("RequestBooking");
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Doctor");
+
+        profileRef = FirebaseDatabase.getInstance().getReference("Users");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
+        profileRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                patientName = snapshot.child("fullName").getValue().toString();
+                PatientName.setText(patientName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         Calendar today  = Calendar.getInstance();
         Calendar oneWeekLater = (Calendar) today.clone();
@@ -108,14 +125,6 @@ public class userMakeBooking extends AppCompatActivity {
         BookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String patientName = PatientName.getText().toString().trim();
-                if(patientName.isEmpty()){
-                    PatientName.setError("Patient Name is required!");
-                    PatientName.requestFocus();
-                    return;
-                }
-
-
                 booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected);
                 reference.child(patientName).setValue(booking);
                 Toast.makeText(userMakeBooking.this, "Successful request a booking", Toast.LENGTH_SHORT).show();
@@ -207,7 +216,7 @@ public class userMakeBooking extends AppCompatActivity {
     }
     private String[] filterBookingTime() {
         ArrayList<String> temp = new ArrayList<>();
-//        reference.child(doctor)
+
         String currentString = fetchData.getTime();
         String[] separatedStartAndEnd = currentString.split("-");
         String[] startTime = separatedStartAndEnd[0].split("\\.");
@@ -233,24 +242,4 @@ public class userMakeBooking extends AppCompatActivity {
         System.arraycopy(tempArray, 0, filteredTime, 0, tempArray.length);
         return filteredTime;
     }
-
-
-//    private void showDateDialog(EditText BookingDate) {
-//        Calendar calendar = Calendar.getInstance();
-//        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                calendar.set(Calendar.YEAR,year);
-//                calendar.set(Calendar.MONTH,month);
-//                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                BookingDate.setText(simpleDateFormat.format(calendar.getTime()));
-//            }
-//        };
-//        new DatePickerDialog(getApplication(),dateSetListener,
-//                calendar.get(Calendar.YEAR),
-//                calendar.get(Calendar.MONTH),
-//                calendar.get(Calendar.DAY_OF_MONTH)).show();
-//    }
-
 }

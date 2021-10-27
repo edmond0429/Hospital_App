@@ -189,5 +189,11 @@
         app:cnb_menuResource="@menu/nav_item"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chipNavigation"
+        app:layout_constraintBottom_toTopOf="@+id/chipNavigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
