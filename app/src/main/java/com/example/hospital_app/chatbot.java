@@ -83,7 +83,7 @@ public class chatbot extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MsgModel> call, Throwable t) {
-                mChatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));
+                mChatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));        // handling error response from bot.
                 mChatRVAdapter.notifyDataSetChanged();
             }
         });
