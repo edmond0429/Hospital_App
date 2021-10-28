@@ -29,6 +29,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
+
 }
 
 dependencies {
@@ -85,5 +90,12 @@ dependencies {
 
     //image slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.0.7'
+
+    //dialogflow library
+    implementation 'com.google.cloud:google-cloud-dialogflow:2.2.0'
+    implementation 'io.grpc:grpc-okhttp:1.31.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
 }

@@ -53,8 +53,8 @@ public class bookRequestAdapter extends RecyclerView.Adapter<bookRequestAdapter.
                         .child(bookrequest.getPatientName());
                 dbRequest.removeValue();
 
-                Booking booking = new Booking(bookrequest.getPatientName(),bookrequest.getDoctorName(),
-                        bookrequest.getBookingDate(),bookrequest.getBookingTime(),bookrequest.getBookingMethod());
+                Booking booking = new Booking(bookrequest.getPatientName(),bookrequest.getBookingDate(),
+                        bookrequest.getBookingTime(),bookrequest.getBookingMethod(),bookrequest.getDoctorName());
                 mDatabase.getReference("Accepted Booking")
                                     .child(bookrequest.getPatientName()).push()
                                     .setValue(booking);

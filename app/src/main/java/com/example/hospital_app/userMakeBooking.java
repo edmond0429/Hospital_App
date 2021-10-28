@@ -39,12 +39,12 @@ public class userMakeBooking extends AppCompatActivity {
     private String userID;
     private DatabaseReference mDatabaseReference, reference, profileRef;
     Booking booking;
-    FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    FirebaseAuth mFirebaseAuth;
     private Spinner mSpinnerBookingTime, mSpinnerMethodMeet, mSpinnerDoctor;
     ArrayList<String> spinnerBookingTime, spinnerMeetMethod, spinnerDoctor;
     ArrayAdapter<String> adapterBookingTime, adapterMethod, adapterDoctor;
     FetchData fetchData;
-    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected, patientName;
+    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected, patientName, booktime;
     String[] bookingtime = { "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "11.00-11.30", "11.30-12.00",
                             "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
                             "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
@@ -65,6 +65,7 @@ public class userMakeBooking extends AppCompatActivity {
         mTvBookingTime = (TextView)findViewById(R.id.tvBookingTimeSelected);
         mTvMeetMethod = (TextView)findViewById(R.id.tvMeetMethodSelected);
         mTvDoctor = (TextView)findViewById(R.id.tvSelectdoctor);
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         Intent i = getIntent();
         fetchData = (FetchData) i.getSerializableExtra("fetchData");
@@ -117,7 +118,8 @@ public class userMakeBooking extends AppCompatActivity {
 
         spinnerBookingTimeFunction();
         spinnerMeetMethodFunction();
-//        spinnerDoctorFunction();
+
+        //auto set the selected doctor name
         String doctorName = fetchData.getDoctorName();
         mTvDoctor.setText(doctorName);
         doctorSelected = mTvDoctor.getText().toString();
@@ -127,7 +129,7 @@ public class userMakeBooking extends AppCompatActivity {
             public void onClick(View view) {
                 booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected);
                 reference.child(patientName).setValue(booking);
-                Toast.makeText(userMakeBooking.this, "Successful request a booking", Toast.LENGTH_SHORT).show();
+                Toast.makeText(userMakeBooking.this, "Successful request a booking.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -191,8 +193,27 @@ public class userMakeBooking extends AppCompatActivity {
     }
 
     private void spinnerBookingTimeFunction() {
+
         spinnerBookingTime = new ArrayList<>();
         String[] temp = filterBookingTime();
+//
+//        reference.child(patientName).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                booktime = snapshot.child("bookingTime").getValue().toString();
+//                for(int i = 0; i<temp.length; i++){
+//                    if(!temp[i].equals(booktime)){
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
         adapterBookingTime = new ArrayAdapter<String>(getApplication(),android.R.layout.simple_spinner_dropdown_item,temp);
         adapterBookingTime.setDropDownViewResource(R.layout.my_dropdown_item);
 

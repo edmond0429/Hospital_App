@@ -8,8 +8,6 @@
     android:background="@color/black"
     tools:context=".userMakeBooking">
 
-
-
     <TextView
         android:id="@+id/banner"
         android:layout_width="match_parent"

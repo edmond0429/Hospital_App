@@ -75,7 +75,7 @@ public class UserHomepage extends AppCompatActivity {
         cardChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), adminMakeRequest.class);   //change to chatbot activity
+                Intent intent = new Intent(getBaseContext(), chatbot.class);   //change to chatbot activity
                 startActivity(intent);
             }
         });
