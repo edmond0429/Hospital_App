@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8C49D8"
+    android:background="#000000"
     tools:context=".addAlarm">
 
     <TextView
@@ -43,18 +43,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="40dp"
-            android:text="Time :"
+            android:hint="Time :"
+            android:textColorHint="#11EA0A"
+            android:textColor="#11EA0A"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_margin="30dp" />
 
         <Button
             android:id="@+id/btnSelectTime"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Select Alarm Time"
+            android:layout_gravity="center"
             android:background="@drawable/shape_login_button"
+            android:text="Select Alarm Time"
             android:textColor="#000099"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -63,9 +67,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Medical Alarm Title"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textColorHint="#2196F3"
+        android:textColor="#2196F3"
+        android:textSize="25dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/timePickerLayout" />
 
 
@@ -75,6 +80,8 @@
         android:layout_height="wrap_content"
         android:checked="false"
         android:text="Recurring Alarm"
+        android:textColor="#FFEB3B"
+        android:buttonTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alarm_title" />
 
@@ -91,6 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mon"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alarm_recurring" />
 
@@ -100,6 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tue"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkMon"
             app:layout_constraintTop_toBottomOf="@+id/alarm_recurring" />
 
@@ -108,6 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wed"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkTue"
             app:layout_constraintTop_toBottomOf="@+id/alarm_recurring" />
 
@@ -116,6 +129,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thu"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkWed"
             app:layout_constraintTop_toBottomOf="@+id/alarm_recurring" />
 
@@ -124,6 +139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fri"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkThu"
             app:layout_constraintTop_toTopOf="@+id/alarm_checkThu" />
 
@@ -132,6 +149,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sat"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkFri"
             app:layout_constraintTop_toTopOf="@+id/alarm_checkThu" />
 
@@ -140,6 +159,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sun"
+            android:textColor="#FFEB3B"
+            android:buttonTint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/alarm_checkSat"
             app:layout_constraintTop_toTopOf="@+id/alarm_checkThu" />
 
@@ -150,20 +171,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Schedule Alarm"
-        android:background="@color/blue"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/chipNavigation"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/shape_login_button"
+        android:text="Schedule an Alarm"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/chipNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:cnb_menuResource="@menu/nav_item"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

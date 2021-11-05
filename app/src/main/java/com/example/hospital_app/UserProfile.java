@@ -53,10 +53,10 @@ public class UserProfile extends Fragment {
                 User userProfile = dataSnapshot.getValue(User.class);
 
                 if(userProfile != null){
-                    String fullName = userProfile.fullName;
-                    String email = userProfile.email;
-                    String age = userProfile.age;
-                    String phoneNo = userProfile.phoneNo;
+                    String fullName = userProfile.getFullName();
+                    String email = userProfile.getEmail();
+                    String age = userProfile.getAge();
+                    String phoneNo = userProfile.getPhoneNo();
 
                     tvFullName.setText(fullName);
                     tvEmail.setText(email);

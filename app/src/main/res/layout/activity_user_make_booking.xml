@@ -51,14 +51,14 @@
         android:id="@+id/tvPatientName"
         android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="___eg : Edward____"
         android:inputType="text"
-        android:textSize="20dp"
         android:textColor="#ccffff"
         android:textColorHint="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
 
@@ -93,15 +93,15 @@
         android:id="@+id/etBookingDate"
         android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:ems="10"
         android:hint="___eg : 10-10-2021___"
         android:inputType="text"
         android:textColor="#ccffff"
-        android:textSize="20dp"
         android:textColorHint="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvDate"
         app:layout_constraintTop_toBottomOf="@+id/tvPatientName" />
 
@@ -117,8 +117,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectdoctor"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHospital"
+        app:layout_constraintVertical_bias="0.119" />
 
     <TextView
         android:id="@+id/tvBookingTime"
@@ -137,7 +137,7 @@
         android:id="@+id/spinnerbookingTime"
         android:layout_width="58dp"
         android:layout_height="52dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvBookingTimeSelected"
@@ -148,7 +148,7 @@
         android:layout_width="137dp"
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="Meet Method: "
         android:textColor="#ccffff"
         android:textSize="20dp"
@@ -159,7 +159,7 @@
         android:id="@+id/spinnerMeetMethod"
         android:layout_width="55dp"
         android:layout_height="51dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvMeetMethodSelected"
@@ -175,6 +175,8 @@
         android:text="Choose booking time."
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/tvBookingTime"
         app:layout_constraintTop_toBottomOf="@+id/etBookingDate" />
 
@@ -182,12 +184,14 @@
         android:id="@+id/tvMeetMethodSelected"
         android:layout_width="188dp"
         android:layout_height="54dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Choose Method to Meet."
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/tvMeetMethod"
         app:layout_constraintTop_toBottomOf="@+id/tvBookingTimeSelected" />
 
@@ -196,7 +200,7 @@
         android:layout_width="132dp"
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Doctor Name: "
         android:textColor="#ccffff"
         android:textSize="20dp"
@@ -210,13 +214,38 @@
         android:layout_width="191dp"
         android:layout_height="61dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Choose booking doctor."
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/tvDoc"
         app:layout_constraintTop_toBottomOf="@+id/tvMeetMethodSelected" />
+
+    <TextView
+        android:id="@+id/tvHospital"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Hospital Name: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDoc" />
+
+
+    <TextView
+        android:id="@+id/tvSelecthospital"
+        android:layout_width="213dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="Choose booking hospital."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvHospital"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectdoctor" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

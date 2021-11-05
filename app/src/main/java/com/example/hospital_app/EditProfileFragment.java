@@ -1,12 +1,6 @@
 package com.example.hospital_app;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-import www.sanju.motiontoast.MotionToast;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +16,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import www.sanju.motiontoast.MotionToast;
+
 public class EditProfileFragment extends Fragment {
 
     private EditText fullName, phoneNo, age;
@@ -36,7 +35,7 @@ public class EditProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
 
-        fullName = view.findViewById(R.id.editFullName);
+//        fullName = view.findViewById(R.id.editFullName);
         phoneNo = view.findViewById(R.id.editPhoneNumber);
         age = view.findViewById(R.id.editAge);
         update = view.findViewById(R.id.update);
@@ -65,15 +64,15 @@ public class EditProfileFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String _USERNAME = fullName.getText().toString();
+//                final String _USERNAME = fullName.getText().toString();
                 final String _PHONENO = phoneNo.getText().toString();
                 final String _AGE = age.getText().toString();
 
-                if(_USERNAME.isEmpty()){
-                    fullName.setError("Username is required!");
-                    fullName.requestFocus();
-                    return;
-                }
+//                if(_USERNAME.isEmpty()){
+//                    fullName.setError("Username is required!");
+//                    fullName.requestFocus();
+//                    return;
+//                }
                 if(_PHONENO.isEmpty()){
                     phoneNo.setError("Phone number is required!");
                     phoneNo.requestFocus();
@@ -90,7 +89,7 @@ public class EditProfileFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User userProfile = dataSnapshot.getValue(User.class);
 
-                        reference.child(userID).child("fullName").setValue(_USERNAME);
+//                        reference.child(userID).child("fullName").setValue(_USERNAME);
                         reference.child(userID).child("age").setValue(_AGE);
                         reference.child(userID).child("phoneNo").setValue(_PHONENO);
 

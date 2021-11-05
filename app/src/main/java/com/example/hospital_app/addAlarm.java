@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +24,8 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import www.sanju.motiontoast.MotionToast;
 
 public class addAlarm extends AppCompatActivity {
 
@@ -33,7 +34,7 @@ public class addAlarm extends AppCompatActivity {
     CheckBox cbRecurring,cbMon,cbTues,cbWed,cbThurs,cbFri,cbSat,cbSun;
     DatabaseReference mDatabaseReference;
     MedicAlarm mMedicAlarm;
-    String dayRepeat = "";
+    String dayRepeat = "",  alarmTime;;
     Button btnSchedule, btnSelectTime;
     FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     String time ="";
@@ -106,10 +107,23 @@ public class addAlarm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String alarmTitle = mEditAlarmTitle.getText().toString();
-                String alarmTime = tvAlarmTime.getText().toString();
+
+                alarmTime= tvAlarmTime.getText().toString();
                 //create notification
                 alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
+                if(alarmTime.isEmpty()){
+                    mEditAlarmTitle.setError(null);
+                    tvAlarmTime.setError("Medic alarm time is required!");
+                    tvAlarmTime.requestFocus();
+                    return;
+                }
+                if(alarmTitle.isEmpty()){
+                    tvAlarmTime.setError(null);
+                    mEditAlarmTitle.setError("Medic alarm title is required!");
+                    mEditAlarmTitle.requestFocus();
+                    return;
+                }
 
                 if(cbMon.isChecked()){
                     dayRepeat += " " + cbMon.getText().toString();
@@ -151,28 +165,30 @@ public class addAlarm extends AppCompatActivity {
                 bundle.putSerializable("alarmtitle",alarmTitle);
                 bundle.putSerializable("time",time);
                 intent.putExtra("bundle",bundle);
-                mPendingIntent = PendingIntent.getBroadcast(addAlarm.this, 1, intent, 0);
+                mPendingIntent = PendingIntent.getBroadcast(addAlarm.this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 //check if the alarm is set with past time, then will be set on next day
                 if(calendar.before(Calendar.getInstance())){
                     calendar.add(Calendar.DATE,1);
                 }
 
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
-
-
-                Toast.makeText(addAlarm.this, "You had successful added an alarm", Toast.LENGTH_SHORT).show();
+//                if(!cbRecurring.isChecked()) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
+//                }
+                MotionToast.Companion.darkColorToast(addAlarm.this,"Medical alarm created succesful!",
+                        "You had successful added an alarm!",
+                        MotionToast.TOAST_SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(addAlarm.this,R.font.helvetica_regular));
             }
         });
     }
-
     private void repeatday(int day) {
-//        calendar.set(Calendar.DAY_OF_WEEK, day);
-//        calendar.set(Calendar.SECOND, 0);
-//        calendar.set(Calendar.MILLISECOND, 0);
-//        final long RUN_DAILY = 24 * 60 * 60 * 1000;
-//
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-//                calendar.getTimeInMillis(), RUN_DAILY, mPendingIntent);
-
+        calendar.set(Calendar.DAY_OF_WEEK, day);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        final long RUN_DAILY = 24 * 60 * 60 * 1000;
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), RUN_DAILY, mPendingIntent);
     }
 }

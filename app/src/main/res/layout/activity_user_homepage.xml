@@ -121,7 +121,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View Request"
+                            android:text="Accepted Request"
                             android:textColor="#3E3A3A"
                             android:textSize="13sp"/>
 

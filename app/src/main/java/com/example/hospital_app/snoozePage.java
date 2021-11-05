@@ -23,8 +23,9 @@ public class snoozePage extends AppCompatActivity {
         btnHomePage = findViewById(R.id.btnHome);
 
         // get the string alarmtitle and time
-        String title = getIntent().getExtras().getString("alarmtitle");
-        String time = getIntent().getExtras().getString("time");
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("alarmtitle");
+        String time = intent.getStringExtra("time");
 
         mTvTitle.setText(title);
         mTvTime.setText(time);

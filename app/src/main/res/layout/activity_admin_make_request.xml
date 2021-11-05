@@ -114,8 +114,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectdoctor"
-        app:layout_constraintVertical_bias="0.364" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSelecthospital"
+        app:layout_constraintVertical_bias="0.153" />
 
     <TextView
         android:id="@+id/tvBookingTime"
@@ -172,6 +172,8 @@
         android:text="Choose booking time."
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/tvBookingTime"
         app:layout_constraintTop_toBottomOf="@+id/etBookingDate" />
 
@@ -185,6 +187,8 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/tvMeetMethod"
         app:layout_constraintTop_toBottomOf="@+id/tvBookingTimeSelected" />
 
@@ -212,6 +216,8 @@
         android:text="Choose booking doctor."
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/tvDoc"
         app:layout_constraintTop_toBottomOf="@+id/tvMeetMethodSelected" />
 
@@ -224,5 +230,30 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvMeetMethodSelected"
         app:layout_constraintTop_toBottomOf="@+id/spinnerMeetMethod" />
+
+
+    <TextView
+        android:id="@+id/tvHospital"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Hospital Name: "
+        android:textColor="#ccffff"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDoc" />
+
+    <TextView
+        android:id="@+id/tvSelecthospital"
+        android:layout_width="191dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:gravity="center"
+        android:text="Choose booking hospital."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toEndOf="@+id/tvHospital"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectdoctor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,19 +48,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/banner" />
 
-        <EditText
-            android:id="@+id/etHospitalName"
-            android:layout_width="220dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginTop="16dp"
+        <TextView
+            android:id="@+id/TVHospitalName"
+            android:layout_width="198dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
             android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="___eg : Lam Hua Ee____"
             android:inputType="text"
-            android:textColor="#ccffff"
+            android:textColor="#FFFFFF"
             android:textColorHint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerHospital"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tvHospitalName"
             app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+
+        <Spinner
+            android:id="@+id/spinnerHospital"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TVHospitalName" />
 
         <TextView
             android:id="@+id/tvHospitalName"
@@ -90,35 +101,37 @@
 
         <TextView
             android:id="@+id/tvDoctorUrl"
-            android:layout_width="136dp"
-            android:layout_height="51dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="144dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
             android:text="Url Of Doctor Image:"
             android:textColor="#ccffff"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/etDoctorUrl"
-            app:layout_constraintHorizontal_bias="0.894"
+            app:layout_constraintHorizontal_bias="0.857"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDoctorDescription" />
 
         <EditText
             android:id="@+id/etDoctorUrl"
-            android:layout_width="220dp"
-            android:layout_height="62dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="227dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
             android:ems="10"
             android:hint="https://filmdaily.co/wp-content/uploads/2020/08/annabelle-lede-1300x866.jpeg"
             android:textColor="#ccffff"
+            android:inputType="text"
+            android:maxLines="1"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintHorizontal_bias="0.864"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etDoctorDescription" />
 
         <TextView
             android:id="@+id/tvDoctorDescription"
-            android:layout_width="135dp"
-            android:layout_height="48dp"
+            android:layout_width="141dp"
+            android:layout_height="45dp"
             android:layout_marginTop="4dp"
             android:text="Doctor Description:"
             android:textColor="#ccffff"
@@ -144,29 +157,33 @@
 
         <EditText
             android:id="@+id/etDoctorDescription"
-            android:layout_width="236dp"
-            android:layout_height="53dp"
+            android:layout_width="222dp"
+            android:layout_height="43dp"
             android:layout_marginTop="4dp"
             android:ems="10"
-            android:hint="____He graduated from ...,__"
+            android:inputType="text"
+            android:maxLines="1"
+            android:hint="____He is from...__"
             android:textColor="#ccffff"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.874"
+            app:layout_constraintHorizontal_bias="0.844"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etDoctorName" />
 
         <EditText
             android:id="@+id/etDoctorName"
-            android:layout_width="220dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="225dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="___eg : Dr.Edward Tan___"
+            android:inputType="text"
+            android:maxLines="1"
             android:textColor="#ccffff"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintHorizontal_bias="0.844"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etCategory" />
 
@@ -191,31 +208,33 @@
             android:layout_marginTop="4dp"
             android:ems="10"
             android:hint="___eg : Brain____"
+            android:maxLines="1"
             android:inputType="text"
             android:textColor="#ccffff"
             android:textColorHint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etHospitalName" />
+            app:layout_constraintTop_toBottomOf="@+id/TVHospitalName" />
 
 
         <EditText
             android:id="@+id/etDoctorTime"
             android:layout_width="220dp"
             android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="9.00-14.00"
+            android:hint="9.00-19.00"
             android:textColor="#ccffff"
             android:textColorHint="@color/white"
             app:layout_constraintStart_toEndOf="@+id/tvDoctorTime"
             app:layout_constraintTop_toBottomOf="@+id/etDoctorUrl" />
 
-
         <TextView
             android:id="@+id/tvDoctorTime"
-            android:layout_width="133dp"
-            android:layout_height="54dp"
-            android:layout_marginStart="24dp"
-            android:text="Doctor's Category: "
+            android:layout_width="146dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="16dp"
+            android:text="Doctor's Working Time: "
             android:textColor="#ccffff"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -229,13 +248,13 @@
             app:cnb_menuResource="@menu/admin_nav"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/adminChipNavigation"
-            app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"
-            tools:layout_editor_absoluteX="0dp" />
+<!--        <FrameLayout-->
+<!--            android:id="@+id/container"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_above="@+id/adminChipNavigation"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/adminChipNavigation"-->
+<!--            tools:layout_editor_absoluteX="0dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

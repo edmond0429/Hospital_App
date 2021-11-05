@@ -38,6 +38,7 @@ public class ViewAcceptedAdapter extends RecyclerView.Adapter<ViewAcceptedAdapte
         acceptedViewHolder.tvRequestDate.setText(bookrequest.getBookingDate());
         acceptedViewHolder.tvRequestTime.setText(bookrequest.getBookingTime());
         acceptedViewHolder.tvRequestMethod.setText(bookrequest.getBookingMethod());
+        acceptedViewHolder.tvHospitalName.setText(bookrequest.getHospitalName());
     }
 
     @Override
@@ -47,7 +48,7 @@ public class ViewAcceptedAdapter extends RecyclerView.Adapter<ViewAcceptedAdapte
 
     public static class AcceptedViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvPatientName, tvDoctor, tvRequestDate, tvRequestTime, tvRequestMethod;
+        TextView tvPatientName, tvDoctor, tvRequestDate, tvRequestTime, tvRequestMethod, tvHospitalName;
 
         public AcceptedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +58,7 @@ public class ViewAcceptedAdapter extends RecyclerView.Adapter<ViewAcceptedAdapte
             tvRequestDate = itemView.findViewById(R.id.tvRequestBookingDate);
             tvRequestTime = itemView.findViewById(R.id.tvRequestBookingTime);
             tvRequestMethod = itemView.findViewById(R.id.tvRequestBookingMethod);
+            tvHospitalName = itemView.findViewById(R.id.tvHospitalName);
         }
     }
 }

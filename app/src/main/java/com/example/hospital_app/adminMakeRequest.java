@@ -28,11 +28,13 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import www.sanju.motiontoast.MotionToast;
 
 public class adminMakeRequest extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener setListener;
-    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor;
+    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor, mTvSelectedHospital;
     EditText PatientName,BookingDate;
     Button BookingButton;
     private DatabaseReference mDatabaseReference, reference, mDatabaseReference1;
@@ -42,12 +44,13 @@ public class adminMakeRequest extends AppCompatActivity {
     ArrayList<String> spinnerBookingTime, spinnerMeetMethod, spinnerDoctor;
     ArrayAdapter<String> adapterBookingTime, adapterMethod, adapterDoctor;
     FetchData fetchData;
-    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected;
+//    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected;
     String[] bookingtime = { "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "11.00-11.30", "11.30-12.00",
             "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
             "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
     String[] spinnerMeetmethod = {"Choose Meet Method", "Online Consultation", "Face to face"};
     String time;
+    String patientName="",bookingDateSelected="",bookingTimeSelected="",methodSelected="",doctorSelected="",hospitalName="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,7 @@ public class adminMakeRequest extends AppCompatActivity {
         mTvBookingTime = (TextView)findViewById(R.id.tvBookingTimeSelected);
         mTvMeetMethod = (TextView)findViewById(R.id.tvMeetMethodSelected);
         mTvDoctor = (TextView)findViewById(R.id.tvSelectdoctor);
+        mTvSelectedHospital = (TextView)findViewById(R.id.tvSelecthospital);
 
         Intent i = getIntent();
         fetchData = (FetchData) i.getSerializableExtra("fetchData");
@@ -104,16 +108,52 @@ public class adminMakeRequest extends AppCompatActivity {
         BookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String patientName = PatientName.getText().toString().trim();
+                patientName = PatientName.getText().toString().trim();
+                bookingDateSelected = BookingDate.getText().toString().trim();
+                bookingTimeSelected = mTvBookingTime.getText().toString().trim();
+                methodSelected = mTvMeetMethod.getText().toString().trim();
+                doctorSelected = mTvDoctor.getText().toString().trim();
+                hospitalName = mTvSelectedHospital.getText().toString().trim();
+
                 if(patientName.isEmpty()){
                     PatientName.setError("Patient Name is required!");
                     PatientName.requestFocus();
                     return;
                 }
+                if(bookingDateSelected.isEmpty()){
+                    BookingDate.setError("Booking date is required!");
+                    BookingDate.requestFocus();
+                    return;
+                }
+                if(bookingTimeSelected.isEmpty()){
+                    mTvBookingTime.setError("Booking time is required!");
+                    mTvBookingTime.requestFocus();
+                    return;
+                }
+                if(methodSelected == "Choose Meet Method"){
+                    mTvMeetMethod.setError("Meet method is required!");
+                    mTvMeetMethod.requestFocus();
+                    return;
+                }
+                if(doctorSelected.isEmpty()){
+                    mTvDoctor.setError("Doctor is required!");
+                    mTvDoctor.requestFocus();
+                    return;
+                }
+                if(hospitalName.isEmpty()){
+                    mTvSelectedHospital.setError("Hospital name is required!");
+                    mTvSelectedHospital.requestFocus();
+                    return;
+                }
 
-
-                booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected);
+                booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected,hospitalName);
                 reference.child(patientName).setValue(booking);
+                MotionToast.Companion.darkColorToast(adminMakeRequest.this,"Added a booking request!",
+                        "Successful request a booking!",
+                        MotionToast.TOAST_SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(getApplicationContext(),R.font.helvetica_regular));
                 Toast.makeText(adminMakeRequest.this, "Successful request a booking", Toast.LENGTH_SHORT).show();
             }
         });
@@ -145,6 +185,19 @@ public class adminMakeRequest extends AppCompatActivity {
                 doctorSelected = mSpinnerDoctor.getSelectedItem().toString();
                 mTvDoctor.setText(doctorSelected);
                 filterBookingTime(doctorSelected);
+
+                mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        hospitalName = snapshot.child(doctorSelected).child("hospitalName").getValue().toString();
+                        mTvSelectedHospital.setText(hospitalName);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
             @Override

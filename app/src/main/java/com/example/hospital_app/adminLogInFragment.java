@@ -26,7 +26,7 @@ public class adminLogInFragment extends Fragment {
 
     private ChipNavigationBar adminChipNav;
     private Fragment fragment = null;
-    private Button logout, editProfile;
+    private Button logout;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -72,7 +72,6 @@ public class adminLogInFragment extends Fragment {
 
 
         logout = (Button)view.findViewById(R.id.signOut);
-
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,16 +88,6 @@ public class adminLogInFragment extends Fragment {
             }
         });
 
-        editProfile = (Button)view.findViewById(R.id.editProfile);
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new EditProfileFragment();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .commit();
-            }
-        });
 
         adminChipNav = view.findViewById(R.id.adminChipNavigation);
         adminChipNav.setItemSelected(R.id.adminProfile,true);

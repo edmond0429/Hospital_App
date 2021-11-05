@@ -118,9 +118,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             etPhoneNo.requestFocus();
             return;
         } else if (!phoneMatcher.find()){
-            Toast.makeText(this, "Please re-enter your phone number. ", Toast.LENGTH_SHORT).show();
             etPhoneNo.setError("Phone Number is not valid");
             etPhoneNo.requestFocus();
+            return;
         }
 
 

@@ -12,7 +12,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,23 +27,25 @@ import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import www.sanju.motiontoast.MotionToast;
 
 public class userMakeBooking extends AppCompatActivity {
 
     DatePickerDialog.OnDateSetListener setListener;
-    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor, PatientName;
+    TextView mTvBookingTime, mTvMeetMethod, mTvDoctor, PatientName, mTvHospital;
     EditText BookingDate;
     Button BookingButton;
     private FirebaseUser user;
     private String userID;
-    private DatabaseReference mDatabaseReference, reference, profileRef;
+    private DatabaseReference mDatabaseReference, reference, profileRef, acceptedBooking;
     Booking booking;
     FirebaseAuth mFirebaseAuth;
     private Spinner mSpinnerBookingTime, mSpinnerMethodMeet, mSpinnerDoctor;
     ArrayList<String> spinnerBookingTime, spinnerMeetMethod, spinnerDoctor;
     ArrayAdapter<String> adapterBookingTime, adapterMethod, adapterDoctor;
     FetchData fetchData;
-    String bookingTimeSelected, methodSelected, bookingDateSelected, doctorSelected, patientName, booktime;
+    String bookingTimeSelected, methodSelected, bookingDateSelected="", doctorSelected, patientName="", hospitalSelected, booktime ="";
     String[] bookingtime = { "9.00-9.30", "9.30-10.00", "10.00-10.30", "10.30-11.00", "11.00-11.30", "11.30-12.00",
                             "12.00-12.30", "12.30-13.00", "13.00-13.30", "13.30-14.00", "14.00-14.30", "14.30-15.00", "15.00-15.30",
                             "15.30-16.00", "16.00-16.30", "16.30-17.00", "17.00-17.30", "17.30-18.00", "18.00-18.30", "18.30-19.00", };
@@ -65,6 +66,7 @@ public class userMakeBooking extends AppCompatActivity {
         mTvBookingTime = (TextView)findViewById(R.id.tvBookingTimeSelected);
         mTvMeetMethod = (TextView)findViewById(R.id.tvMeetMethodSelected);
         mTvDoctor = (TextView)findViewById(R.id.tvSelectdoctor);
+        mTvHospital = (TextView)findViewById(R.id.tvSelecthospital);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
         Intent i = getIntent();
@@ -72,6 +74,7 @@ public class userMakeBooking extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference("RequestBooking");
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Doctor");
+        acceptedBooking = FirebaseDatabase.getInstance().getReference("Accepted Booking");
 
         profileRef = FirebaseDatabase.getInstance().getReference("Users");
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -124,12 +127,34 @@ public class userMakeBooking extends AppCompatActivity {
         mTvDoctor.setText(doctorName);
         doctorSelected = mTvDoctor.getText().toString();
 
+        //auto set the selected doctor name
+        String hospitalName = fetchData.getHospitalName();
+        mTvHospital.setText(hospitalName);
+        hospitalSelected = mTvHospital.getText().toString();
+
         BookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                booking = new Booking(patientName,bookingDateSelected,bookingTimeSelected,methodSelected,doctorSelected);
-                reference.child(patientName).setValue(booking);
-                Toast.makeText(userMakeBooking.this, "Successful request a booking.", Toast.LENGTH_SHORT).show();
+                if(bookingDateSelected.isEmpty()) {
+                    BookingDate.setError("Date is required!");
+                    BookingDate.requestFocus();
+                    return;
+                } else if(methodSelected == "Choose Meet Method"){
+                    BookingDate.setError(null);
+                    mTvMeetMethod.setError("Meet method is required!");
+                    mTvMeetMethod.requestFocus();
+                }
+                else {
+                    BookingDate.setError(null);
+                    booking = new Booking(patientName, bookingDateSelected, bookingTimeSelected, methodSelected, doctorSelected, hospitalSelected);
+                    reference.child(patientName).setValue(booking);
+                    MotionToast.Companion.darkColorToast(userMakeBooking.this,"Request Booking Succesful!",
+                            "Please wait for administrator to accept the booking!",
+                            MotionToast.TOAST_SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(userMakeBooking.this,R.font.helvetica_regular));
+                }
             }
         });
     }
@@ -193,26 +218,8 @@ public class userMakeBooking extends AppCompatActivity {
     }
 
     private void spinnerBookingTimeFunction() {
-
         spinnerBookingTime = new ArrayList<>();
         String[] temp = filterBookingTime();
-//
-//        reference.child(patientName).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                booktime = snapshot.child("bookingTime").getValue().toString();
-//                for(int i = 0; i<temp.length; i++){
-//                    if(!temp[i].equals(booktime)){
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 
         adapterBookingTime = new ArrayAdapter<String>(getApplication(),android.R.layout.simple_spinner_dropdown_item,temp);
         adapterBookingTime.setDropDownViewResource(R.layout.my_dropdown_item);
@@ -221,9 +228,24 @@ public class userMakeBooking extends AppCompatActivity {
         mSpinnerBookingTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(adapterView.getItemAtPosition(i).equals("Choose Booking Time")){
-//                    Toast.makeText(userMakeBooking.this, "Please select a booking time", Toast.LENGTH_SHORT).show();
+
+            acceptedBooking.child(patientName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                 booktime = dataSnapshot.child("bookingTime").getValue().toString();
+                    }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+                if(adapterView.getItemAtPosition(i).equals(booktime)){
+                    mTvBookingTime.setError("the selected time is invalid");
+                    adapterView.requestFocus();
+                    return;
                 }else{
+                    mTvBookingTime.setError(null);
                     bookingTimeSelected = mSpinnerBookingTime.getSelectedItem().toString();
                     mTvBookingTime.setText(bookingTimeSelected);
                 }

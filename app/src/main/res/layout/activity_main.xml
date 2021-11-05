@@ -22,6 +22,14 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.469" />
 
+  <ImageView
+      android:id="@+id/imageView2"
+      android:layout_width="100dp"
+      android:layout_height="80dp"
+      android:src="@drawable/ic_baseline_arrow_downward_24"
+      app:layout_constraintBottom_toTopOf="@+id/chipNavigation"
+      app:layout_constraintEnd_toEndOf="parent" />
+
   <com.ismaeldivita.chipnavigation.ChipNavigationBar
       android:id="@+id/chipNavigation"
       android:layout_width="match_parent"

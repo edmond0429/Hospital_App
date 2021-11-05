@@ -52,21 +52,29 @@
         android:id="@+id/btnAddBooking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_login_button"
         android:text="Make Booking Request"
+        android:textColor="@color/purple"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRequest" />
 
     <Button
         android:id="@+id/btnManageBooking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_login_button"
         android:text="Manage Booking Request"
+        android:textColor="#FF0000"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddBooking" />
 
@@ -74,10 +82,14 @@
         android:id="@+id/btnViewComplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_login_button"
         android:text="View Accepted Booking"
+        android:textColor="#38B808"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnManageBooking" />
 
@@ -88,5 +100,19 @@
         android:layout_alignParentBottom="true"
         app:cnb_menuResource="@menu/admin_nav"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRequest"
+        android:layout_width="346dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Administrator Manage Request Page"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bannerDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

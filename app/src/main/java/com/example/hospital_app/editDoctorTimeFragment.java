@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +21,9 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import www.sanju.motiontoast.MotionToast;
 
 public class editDoctorTimeFragment extends Fragment {
 
@@ -35,7 +36,7 @@ public class editDoctorTimeFragment extends Fragment {
     ArrayAdapter<String> adapterDoctor, adapaterViewDoctor;
     private ChipNavigationBar adminNav;
     private Fragment fragment = null;
-    String doctor, viewdoctor, time;
+    String doctor, viewdoctor, time, workingTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,13 +71,25 @@ public class editDoctorTimeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String addScheduleTime = mEtTime.getText().toString();
+                if (addScheduleTime.isEmpty()) {
+                    mEtTime.setError("Doctor's working time is required!");
+                    mEtTime.requestFocus();
+                    return;
+                }
 
                 mDatabaseReference.child(doctor).child("time").setValue(addScheduleTime);
                 mEtTime.setText("");
                 spinnerViewDoctor.clear();
+                spinnerDoctorList.clear();
+                adapterDoctor.notifyDataSetChanged();
                 adapaterViewDoctor.notifyDataSetChanged();
+                MotionToast.Companion.darkColorToast(getActivity(),"Edited doctor's working hour!",
+                        "Edited a new working time for doctor!",
+                        MotionToast.TOAST_SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(getContext(),R.font.helvetica_regular));
 
-                Toast.makeText(getContext(), "Edited a new time for doctor", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -140,6 +153,9 @@ public class editDoctorTimeFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 doctor = mSpinnerDoctor.getSelectedItem().toString();
                 mTvSelectedDoctor.setText(doctor);
+
+
+
             }
 
             @Override
@@ -150,7 +166,6 @@ public class editDoctorTimeFragment extends Fragment {
     }
 
     private void ShowViewDoctor() {
-
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -162,33 +177,28 @@ public class editDoctorTimeFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
         mSpinnerViewDoctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 viewdoctor = mSpinnerViewDoctor.getSelectedItem().toString();
                 mTvViewDoctor.setText(viewdoctor);
-
                 mDatabaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         time = snapshot.child(viewdoctor).child("time").getValue().toString();
                         mTvViewDoctorTime.setText(time);
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }

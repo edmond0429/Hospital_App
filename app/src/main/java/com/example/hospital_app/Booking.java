@@ -6,16 +6,26 @@ public class Booking {
     public String bookingTime;
     public String bookingMethod;
     public String doctorName;
+    public String hospitalName;
 
     public Booking(){
     }
 
-    public Booking(String patientName, String bookingDate, String bookingTime, String bookingMethod, String doctorName) {
+    public Booking(String patientName, String bookingDate, String bookingTime, String bookingMethod, String doctorName, String hospitalName) {
         this.patientName = patientName;
         this.bookingDate = bookingDate;
         this.bookingTime = bookingTime;
         this.bookingMethod = bookingMethod;
         this.doctorName = doctorName;
+        this.hospitalName = hospitalName;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getPatientName() {

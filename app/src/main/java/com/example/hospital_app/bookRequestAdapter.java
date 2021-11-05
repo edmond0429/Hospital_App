@@ -45,6 +45,7 @@ public class bookRequestAdapter extends RecyclerView.Adapter<bookRequestAdapter.
         bookingRequestViewHolder.tvRequestDate.setText(bookrequest.getBookingDate());
         bookingRequestViewHolder.tvRequestTime.setText(bookrequest.getBookingTime());
         bookingRequestViewHolder.tvRequestMethod.setText(bookrequest.getBookingMethod());
+        bookingRequestViewHolder.tvHospitalName.setText(bookrequest.getHospitalName());
 
         bookingRequestViewHolder.btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,10 +55,16 @@ public class bookRequestAdapter extends RecyclerView.Adapter<bookRequestAdapter.
                 dbRequest.removeValue();
 
                 Booking booking = new Booking(bookrequest.getPatientName(),bookrequest.getBookingDate(),
-                        bookrequest.getBookingTime(),bookrequest.getBookingMethod(),bookrequest.getDoctorName());
+                        bookrequest.getBookingTime(),bookrequest.getBookingMethod(),bookrequest.getDoctorName(),bookrequest.getHospitalName());
                 mDatabase.getReference("Accepted Booking")
                                     .child(bookrequest.getPatientName()).push()
                                     .setValue(booking);
+//                MotionToast.Companion.darkColorToast(this,"Added a booking request!",
+//                        "Successful request a booking!",
+//                        MotionToast.TOAST_SUCCESS,
+//                        MotionToast.GRAVITY_BOTTOM,
+//                        MotionToast.LONG_DURATION,
+//                        ResourcesCompat.getFont(mContext,R.font.helvetica_regular));
             }
         });
 
@@ -77,7 +84,7 @@ public class bookRequestAdapter extends RecyclerView.Adapter<bookRequestAdapter.
 
     public static class BookRequestViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvPatientName, tvDoctor, tvRequestDate, tvRequestTime, tvRequestMethod;
+        TextView tvPatientName, tvDoctor, tvRequestDate, tvRequestTime, tvRequestMethod, tvHospitalName;
         Button btnAccept, btnDeclined;
 
         public BookRequestViewHolder(@NonNull View itemView) {
@@ -88,8 +95,11 @@ public class bookRequestAdapter extends RecyclerView.Adapter<bookRequestAdapter.
             tvRequestDate = itemView.findViewById(R.id.tvRequestBookingDate);
             tvRequestTime = itemView.findViewById(R.id.tvRequestBookingTime);
             tvRequestMethod = itemView.findViewById(R.id.tvRequestBookingMethod);
+            tvHospitalName = itemView.findViewById(R.id.tvHospitalName);
             btnAccept = itemView.findViewById(R.id.btnAccept);
             btnDeclined = itemView.findViewById(R.id.btnDeclined);
+
+
 
         }
     }

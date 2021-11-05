@@ -65,12 +65,9 @@ public class chatbot extends AppCompatActivity {
         //url for connecting the brain of chatbot in brainshop
         String url = "http://api.brainshop.ai/get?bid=160841&key=EJjtMISmlRdvmh8i&uid=[uid]&msg="+message;
         String BASE_URL = "http://api.brainshop.ai/";
-        Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
-        Call<MsgModel> call = retrofitAPI.getMessage(url);
+        Call<MsgModel> call = retrofitAPI.getMessage(url);                          //pass the url to get the API
         call.enqueue(new Callback<MsgModel>() {
             @Override
             public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
@@ -80,7 +77,6 @@ public class chatbot extends AppCompatActivity {
                     mChatRVAdapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onFailure(Call<MsgModel> call, Throwable t) {
                 mChatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));        // handling error response from bot.

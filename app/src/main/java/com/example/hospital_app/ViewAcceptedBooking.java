@@ -36,8 +36,14 @@ public class ViewAcceptedBooking extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 acceptList = new ArrayList<>();
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    Booking accept = dataSnapshot.getValue(Booking.class);
-                    acceptList.add(accept);
+                    String name = dataSnapshot.getKey();
+                    String uid = dataSnapshot.child(name).getKey();
+
+                   for(DataSnapshot temp: snapshot.child(uid).getChildren()){
+                       Booking accept = temp.getValue(Booking.class);
+                       acceptList.add(accept);
+                   }
+
                 }
                 mViewAcceptedAdapter = new ViewAcceptedAdapter(getApplicationContext(),acceptList);
                 mRecyclerView.setAdapter(mViewAcceptedAdapter);

@@ -20,7 +20,7 @@
         android:shadowDx="-8"
         android:shadowDy="-10"
         android:shadowRadius="10"
-        android:text="Welcome to Ed's Library"
+        android:text="Welcome to Ed's Medic"
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"

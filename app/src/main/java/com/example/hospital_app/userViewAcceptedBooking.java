@@ -49,16 +49,11 @@ public class userViewAcceptedBooking extends AppCompatActivity {
                 getBooking();
             }
 
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-
-
-
     }
 
     public void getBooking(){

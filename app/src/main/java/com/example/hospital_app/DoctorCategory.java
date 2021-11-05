@@ -32,7 +32,7 @@ public class DoctorCategory extends AppCompatActivity {
         Intent i = this.getIntent();
         Bundle bundle = i.getExtras();
         FetchHospitalProfile fetchHospitalProfiles = (FetchHospitalProfile) bundle.getSerializable("key1"); //Pass previous hospital profile details to this activity
-        String doctorCategory = bundle.getString("key2");
+        String hospName = bundle.getString("key2");       //pass the hospital name
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Doctor");
         mRecyclerViewDoctorCategory.setLayoutManager(new LinearLayoutManager(this));
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -42,7 +42,7 @@ public class DoctorCategory extends AppCompatActivity {
                 for(DataSnapshot ds : dataSnapshot.getChildren())
                 {
                     FetchData fetchDataList = ds.getValue(FetchData.class);
-                    if(fetchDataList.getHospitalName().equals(doctorCategory)) {    //check for list of hospital doctor
+                    if(fetchDataList.getHospitalName().equals(hospName)) {    //check for list of hospital doctor
                         mFetchData.add(fetchDataList);
                     }
                 }

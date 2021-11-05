@@ -91,7 +91,7 @@ public class UserHomepage extends AppCompatActivity {
         cardLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ViewAcceptedBooking.class);
+                Intent intent = new Intent(getBaseContext(), hospLocation.class);
                 startActivity(intent);
             }
         });
@@ -99,7 +99,7 @@ public class UserHomepage extends AppCompatActivity {
         cardFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ViewAcceptedBooking.class);
+                Intent intent = new Intent(getBaseContext(), userFeedback.class);
                 startActivity(intent);
             }
         });

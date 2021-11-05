@@ -159,6 +159,11 @@ public class LoginProfile extends Fragment implements View.OnClickListener {
             return;
         }
 
+        if(password.isEmpty()){
+            etPassword.setError("Password is required!");
+            etPassword.requestFocus();
+            return;
+        }
         if(password.length() < 6){
             etPassword.setError("Min password length is 6 characters!");
             etPassword.requestFocus();

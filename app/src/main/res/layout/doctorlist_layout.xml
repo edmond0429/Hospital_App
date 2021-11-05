@@ -10,11 +10,10 @@
 
     <ImageView
         android:id="@+id/imgDoctor"
-        android:layout_width="91dp"
-        android:layout_height="163dp"
+        android:layout_width="116dp"
+        android:layout_height="147dp"
         android:layout_margin="20dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/doctor1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +33,8 @@
 
     <TextView
         android:id="@+id/doctorDescription"
-        android:layout_width="250dp"
-        android:layout_height="118dp"
+        android:layout_width="213dp"
+        android:layout_height="90dp"
         android:fontFamily="sans-serif"
         android:textColor="#C3673E"
         android:textSize="25sp"
@@ -46,19 +45,5 @@
         app:layout_constraintStart_toEndOf="@+id/imgDoctor"
         app:layout_constraintTop_toBottomOf="@+id/doctorName"
         app:layout_constraintVertical_bias="0.0" />
-
-    <ImageButton
-        android:id="@+id/favBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/ic_baseline_shadow_24"
-        android:gravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.852" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
