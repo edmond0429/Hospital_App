@@ -140,7 +140,7 @@ public class TimerFragment extends Fragment {
             final MedicAlarm medicAlarmPosition = medicList.get(viewHolder.getAdapterPosition());
             medicList.remove(viewHolder.getAdapterPosition());
             DatabaseReference dbDelete = mDatabaseReference
-                    .child(mAuth.getCurrentUser().getUid()).child(medicAlarmPosition.getMedicTitle());
+                    .child(mAuth.getCurrentUser().getUid()).child(String.valueOf(medicAlarmPosition.getMedicId()));
             dbDelete.removeValue();
             mAlarmAdapter.notifyDataSetChanged();
         }

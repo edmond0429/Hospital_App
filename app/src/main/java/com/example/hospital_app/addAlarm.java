@@ -16,19 +16,24 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import www.sanju.motiontoast.MotionToast;
 
 public class addAlarm extends AppCompatActivity {
 
+    private int requestCode;
     TextView tvAlarmTime;
     EditText mEditAlarmTitle;
     CheckBox cbRecurring,cbMon,cbTues,cbWed,cbThurs,cbFri,cbSat,cbSun;
@@ -154,32 +159,45 @@ public class addAlarm extends AppCompatActivity {
                     repeatday(1);
                 }
 
-                //store data in firebase
-                mMedicAlarm = new MedicAlarm(alarmTitle,alarmTime,dayRepeat);
-                mDatabaseReference.child(mFirebaseAuth.getCurrentUser().getUid())
-                        .child(alarmTitle).setValue(mMedicAlarm);
+                mDatabaseReference.child(mFirebaseAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        requestCode = (int)snapshot.getChildrenCount();
+                        //store data in firebase
+                        mMedicAlarm = new MedicAlarm(alarmTitle,alarmTime,dayRepeat,requestCode);
+                        mDatabaseReference.child(mFirebaseAuth.getCurrentUser().getUid()).child(String.valueOf(requestCode)).setValue(mMedicAlarm);
+//                        .child(alarmTitle).setValue(mMedicAlarm);
 
-                Intent intent = new Intent(addAlarm.this, AlarmReceiver.class);
-                //pass bundle to store alarm title and time to alarm receiver class
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("alarmtitle",alarmTitle);
-                bundle.putSerializable("time",time);
-                intent.putExtra("bundle",bundle);
-                mPendingIntent = PendingIntent.getBroadcast(addAlarm.this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                //check if the alarm is set with past time, then will be set on next day
-                if(calendar.before(Calendar.getInstance())){
-                    calendar.add(Calendar.DATE,1);
-                }
+                                Intent intent = new Intent(addAlarm.this, AlarmReceiver.class);
+                        //pass bundle to store alarm title and time to alarm receiver class
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("alarmtitle",alarmTitle);
+                        bundle.putSerializable("time",time);
+                        intent.putExtra("bundle",bundle);
+                        mPendingIntent = PendingIntent.getBroadcast(addAlarm.this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        //check if the alarm is set with past time, then will be set on next day
+                        if(calendar.before(Calendar.getInstance())){
+                            calendar.add(Calendar.DATE,1);
+                        }
 
 //                if(!cbRecurring.isChecked()) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
+                        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), mPendingIntent);
 //                }
-                MotionToast.Companion.darkColorToast(addAlarm.this,"Medical alarm created succesful!",
-                        "You had successful added an alarm!",
-                        MotionToast.TOAST_SUCCESS,
-                        MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(addAlarm.this,R.font.helvetica_regular));
+                        MotionToast.Companion.darkColorToast(addAlarm.this,"Medical alarm created succesful!",
+                                "You had successful added an alarm!",
+                                MotionToast.TOAST_SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(addAlarm.this,R.font.helvetica_regular));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
         });
     }

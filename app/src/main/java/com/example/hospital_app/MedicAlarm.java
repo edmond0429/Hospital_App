@@ -2,14 +2,16 @@ package com.example.hospital_app;
 
 public class MedicAlarm {
     String medicTitle, medicTime, medicRepetition;
+    int medicId;
 
     public MedicAlarm() {
     }
 
-    public MedicAlarm(String medicTitle, String medicTime, String medicRepetition) {
+    public MedicAlarm(String medicTitle, String medicTime, String medicRepetition, int medicId) {
         this.medicTitle = medicTitle;
         this.medicTime = medicTime;
         this.medicRepetition = medicRepetition;
+        this.medicId = medicId;
     }
 
     public String getMedicTitle() {
@@ -34,5 +36,13 @@ public class MedicAlarm {
 
     public void setMedicRepetition(String medicRepetition) {
         this.medicRepetition = medicRepetition;
+    }
+
+    public int getMedicId() {
+        return medicId;
+    }
+
+    public void setMedicId(int medicId) {
+        this.medicId = medicId;
     }
 }
